@@ -1,0 +1,26 @@
+root@e3f523aadb3d:/# ls
+bin  boot  derby.log  dev  etc  home  input.txt  lib  lib64  media  metastore_db  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@e3f523aadb3d:/# vim txtFile.txt
+root@e3f523aadb3d:/# vim csvFile.csv
+root@e3f523aadb3d:/# hdfs dfs -mkdir /user/lalitham/textData/
+root@e3f523aadb3d:/# hdfs dfs -put ./txtFile.txt /user/lalitham/textData/
+root@e3f523aadb3d:/# hdfs dfs -cat /user/lalitham/textData/txtFile.txt
+Night. That over years creepeth green fourth had after also seas make. Female living sea very hath. Dry good in is bring fifth under creeping all tree land.
+root@e3f523aadb3d:/# hdfs dfs -put ./csvFile.csv /user/lalitham/textData/
+root@e3f523aadb3d:/# hdfs dfs -cat /user/lalitham/textData/csvFile.csv
+"Sell", "List", "Living", "Rooms", "Beds", "Baths", "Age", "Acres", "Taxes"
+142, 160, 28, 10, 5, 3,  60, 0.28,  3167
+175, 180, 18,  8, 4, 1,  12, 0.43,  4033
+129, 132, 13,  6, 3, 1,  41, 0.33,  1471
+138, 140, 17,  7, 3, 1,  22, 0.46,  3204
+232, 240, 25,  8, 4, 3,   5, 2.05,  3613
+135, 140, 18,  7, 4, 3,   9, 0.57,  3028
+150, 160, 20,  8, 4, 3,  18, 4.00,  3131
+207, 225, 22,  8, 4, 2,  16, 2.22,  5158
+271, 285, 30, 10, 5, 2,  30, 0.53,  5702
+ 89,  90, 10,  5, 3, 1,  43, 0.30,  2054
+153, 157, 22,  8, 3, 3,  18, 0.38,  4127
+root@e3f523aadb3d:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/lalitham/textData/txtFile.txt
+type:regular file permissions:644 root:supergroup size:157 name:txtFile.txt
+root@e3f523aadb3d:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/lalitham/textData/csvFile.csv
+type:regular file permissions:644 root:supergroup size:527 name:csvFile.csv

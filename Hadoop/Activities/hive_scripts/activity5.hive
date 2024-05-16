@@ -1,0 +1,33 @@
+create database office;
+use office;
+
+CREATE TABLE employee
+(id INT, name STRING, dept STRING, yoj INT, salary INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+DESCRIBE employee;
+
+LOAD DATA LOCAL INPATH '/root/empData.csv' INTO TABLE employee;
+
+SELECT * FROM employee;
+
+SELECT COUNT(*) FROM employee;
+
+SELECT  id, name FROM employee;
+
+SELECT * FROM employee WHERE salary > 30000;
+
+SELECT count(*) FROM employee;
+
+#Exports to HDFS directory
+INSERT OVERWRITE DIRECTORY '/user/root/output/export' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM employee;
+
+dfs -ls /user/root/output/export
+
+#Exports to LOCAL directory
+INSERT OVERWRITE LOCAL DIRECTORY '/export' ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM employee;
+
+cat /export/000000_0 > output.csv
