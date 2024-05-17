@@ -1,0 +1,10 @@
+-- Create a table to store results
+CREATE TABLE episode5table (name STRING, line STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+
+
+-- Load data into the database using a file on your local system
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialogues.txt' INTO TABLE episode5table;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/user/lalitham/HiveOutput' 
+SELECT COUNT(*) FROM episode5table WHERE line LIKE '%Luke%';

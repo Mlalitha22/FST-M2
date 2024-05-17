@@ -1,0 +1,11 @@
+-- Create a table to store results
+CREATE TABLE files (name STRING, line STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+
+-- Load data into the database using a file on your local system
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialogues.txt' INTO TABLE files;
+LOAD DATA LOCAL INPATH '/root/episodeV_dialogues.txt' INTO TABLE files;
+LOAD DATA LOCAL INPATH '/root/episodeVI_dialogues.txt' INTO TABLE files;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/user/lalitham/HiveOutput' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+SELECT name, COUNT(no_of_lines) AS no_of_lines from files GROUP BY name ORDER BY no_of_lines DESC;
